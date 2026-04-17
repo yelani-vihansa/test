@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sample Webpage | Aurora Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;700&family=Syne:wght@500;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #152238;
+      --soft-ink: #3c4d68;
+      --paper: #fffdf6;
+      --sand: #f0e9d8;
+      --gold: #e4b84f;
+      --sea: #2e9c9d;
+      --coral: #ec7b62;
+      --shadow: rgba(21, 34, 56, 0.15);
+      --max-width: 1080px;
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "IBM Plex Sans", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(900px 500px at -15% -10%, rgba(236, 123, 98, 0.26), transparent 60%),
+        radial-gradient(700px 400px at 105% 15%, rgba(46, 156, 157, 0.24), transparent 55%),
+        linear-gradient(180deg, #fffef8 0%, #f8f0df 60%, #f4ecd6 100%);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    .grain {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.08;
+      background-image:
+        radial-gradient(circle at 20% 20%, #000 0.5px, transparent 0.6px),
+        radial-gradient(circle at 80% 70%, #000 0.5px, transparent 0.6px);
+      background-size: 7px 7px, 9px 9px;
+      z-index: 0;
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      width: min(var(--max-width), calc(100% - 2rem));
+      margin: 0 auto;
+      padding: 1.2rem 0 2rem;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.7rem 0;
+      animation: slide-down 700ms ease-out both;
+    }
+
+    .brand {
+      font-family: "Syne", sans-serif;
+      font-size: 1.18rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--ink);
+      margin-left: 1rem;
+      font-weight: 500;
+      padding-bottom: 0.15rem;
+      border-bottom: 2px solid transparent;
+      transition: border-color 180ms ease;
+    }
+
+    nav a:hover {
+      border-color: var(--coral);
+    }
+
+    .hero {
+      margin-top: 2rem;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 1.3rem;
+      align-items: stretch;
+    }
+
+    .panel {
+      background: rgba(255, 255, 255, 0.62);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(21, 34, 56, 0.08);
+      border-radius: var(--radius);
+      box-shadow: 0 12px 28px var(--shadow);
+      padding: 2rem;
+    }
+
+    .hero-copy {
+      animation: rise-in 700ms 120ms ease both;
+    }
+
+    h1 {
+      font-family: "Syne", sans-serif;
+      font-weight: 800;
+      line-height: 1.05;
+      font-size: clamp(2.2rem, 4.5vw, 4rem);
+      margin-bottom: 1rem;
+      text-wrap: balance;
+    }
+
+    .hero p {
+      color: var(--soft-ink);
+      max-width: 44ch;
+      margin-bottom: 1.4rem;
+    }
+
+    .actions {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 999px;
+      padding: 0.72rem 1.15rem;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 200ms ease, box-shadow 200ms ease;
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, var(--gold), #f4d170);
+      color: #2d2102;
+      box-shadow: 0 8px 18px rgba(228, 184, 79, 0.35);
+    }
+
+    .btn.secondary {
+      background: #ffffff;
+      color: var(--ink);
+      border: 1px solid rgba(21, 34, 56, 0.12);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .hero-card {
+      display: grid;
+      align-content: center;
+      gap: 0.9rem;
+      background:
+        linear-gradient(150deg, rgba(46, 156, 157, 0.2), rgba(236, 123, 98, 0.25)),
+        rgba(255, 255, 255, 0.8);
+      animation: rise-in 700ms 260ms ease both;
+    }
+
+    .stat {
+      display: flex;
+      align-items: baseline;
+      gap: 0.65rem;
+    }
+
+    .stat strong {
+      font-family: "Syne", sans-serif;
+      font-size: 2rem;
+      line-height: 1;
+    }
+
+    .stat span {
+      color: var(--soft-ink);
+      font-size: 0.95rem;
+    }
+
+    .feature-grid {
+      margin-top: 1.3rem;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .feature {
+      animation: rise-in 650ms ease both;
+    }
+
+    .feature:nth-child(1) { animation-delay: 340ms; }
+    .feature:nth-child(2) { animation-delay: 420ms; }
+    .feature:nth-child(3) { animation-delay: 500ms; }
+
+    .feature h3 {
+      font-family: "Syne", sans-serif;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+      font-size: 1.1rem;
+    }
+
+    .feature p {
+      color: var(--soft-ink);
+      font-size: 0.95rem;
+    }
+
+    footer {
+      margin-top: 1.8rem;
+      color: var(--soft-ink);
+      text-align: center;
+      font-size: 0.92rem;
+      animation: rise-in 700ms 580ms ease both;
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+
+      nav {
+        display: none;
+      }
+    }
+
+    @keyframes rise-in {
+      from {
+        opacity: 0;
+        transform: translateY(22px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slide-down {
+      from {
+        opacity: 0;
+        transform: translateY(-14px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <header>
+      <div class="brand">Aurora Studio</div>
+      <nav aria-label="Main">
+        <a href="#">Home</a>
+        <a href="#">Gallery</a>
+        <a href="#">Contact</a>
+      </nav>
+    </header>
+
+    <main class="hero">
+      <section class="panel hero-copy">
+        <h1>Build Beautiful Pages Faster</h1>
+        <p>
+          This sample page shows a custom visual style with layered backgrounds,
+          expressive typography, and a responsive layout that works cleanly on desktop and mobile.
+        </p>
+        <div class="actions">
+          <button class="btn primary" type="button">Start Project</button>
+          <button class="btn secondary" type="button">See Examples</button>
+        </div>
+      </section>
+
+      <aside class="panel hero-card" aria-label="Quick stats">
+        <div class="stat">
+          <strong>12k</strong>
+          <span>monthly visitors</span>
+        </div>
+        <div class="stat">
+          <strong>98%</strong>
+          <span>performance score</span>
+        </div>
+        <div class="stat">
+          <strong>24h</strong>
+          <span>average launch time</span>
+        </div>
+      </aside>
+    </main>
+
+    <section class="feature-grid" aria-label="Features">
+      <article class="panel feature">
+        <h3>Creative Visual Language</h3>
+        <p>Warm tones, glass surfaces, and grain details create a distinct look.</p>
+      </article>
+      <article class="panel feature">
+        <h3>Intentional Motion</h3>
+        <p>Content reveals with staggered timing to guide attention naturally.</p>
+      </article>
+      <article class="panel feature">
+        <h3>Mobile Ready</h3>
+        <p>The layout adapts to small screens without sacrificing readability.</p>
+      </article>
+    </section>
+
+    <footer>
+      Sample webpage template created for quick project bootstrapping.
+    </footer>
+  </div>
+</body>
+</html>
