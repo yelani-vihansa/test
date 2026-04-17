@@ -18,3 +18,5 @@ This workspace contains a simple sample webpage and supporting documentation.
 - Distinct visual design with gradients and layered backgrounds
 - Typography hierarchy and custom buttons
 - Basic reveal animations for a polished first impression
+
+******
