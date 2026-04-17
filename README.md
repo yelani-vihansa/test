@@ -19,4 +19,4 @@ This workspace contains a simple sample webpage and supporting documentation.
 - Typography hierarchy and custom buttons
 - Basic reveal animations for a polished first impression
 
-******
+*
